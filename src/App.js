@@ -1,12 +1,13 @@
 
 import GlobalStyles from "./styles/GlobalStyles";
-import Main from './Components/main';
+
+import Videos from "./Components/AddVideo";
 
 function App() {
   return (
     <div>
       <h1>Hello world</h1>
-      <Main />
+      <Videos />
       <GlobalStyles />
     </div>
   );

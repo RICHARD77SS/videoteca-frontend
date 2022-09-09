@@ -3,16 +3,31 @@ import Video from '../EditVideo';
 
 import { VideosSt, AddVideoSt } from './styles'
 
+import api from '../../services/api';
 
 const Videos = () => {
+
+  const [videos, setVideos] = React.useState([]);
+
+
+  React.useEffect(() => {
+    api.get("/videos").then(({ data }) => {
+      setVideos(data.videos)
+    })
+    console.log(videos)  
+    //eslint-disable-next-line
+  }, [])
   return (
     <VideosSt>
-      <Video
-        id={1}
-        title='Title test'
-        link='https://www.localhost:3000/videos'
-        liked={true}
-      />
+      {videos?.map((video) => (
+        <Video
+          key={video._id}
+          id={video._id}
+          title={video.title}
+          link={video.link}
+          liked={video.liked}
+        />
+      ))}
       <AddVideoSt>
         +
       </AddVideoSt>

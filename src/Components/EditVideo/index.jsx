@@ -3,7 +3,7 @@ import React from 'react';
 import { EditSt, Flex, Button } from './styles';
 import { IoPencil, IoThumbsUp, IoTrashBin } from 'react-icons/io5'
 
-const Edit = ({ id, title, link, liked }) => {
+const Video = ({ id, title, link, liked }) => {
   return (
     <EditSt>
       <h2>{title}</h2>
@@ -24,4 +24,4 @@ const Edit = ({ id, title, link, liked }) => {
   )
 }
 
-export default Edit;
+export default Video;

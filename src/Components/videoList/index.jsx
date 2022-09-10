@@ -1,28 +1,30 @@
 import React, { useContext } from 'react';
 
+
+import { useAxios } from '../../hooks/useAxios';
+
 import { VideoContext } from '../../contexts/videoContext';
 import Video from '../video';
 
 import { VideosSt, AddVideoSt } from './styles'
 
-import api from '../../services/api';
 
 
 const Videos = () => {
   const { handleAdd } = useContext(VideoContext)
-  const [videos, setVideos] = React.useState([]);
+  // const [videos, setVideos] = React.useState([]);
+  // React.useEffect(() => {
+  //   api.get("/videos").then(({ data }) => {
+  //     setVideos(data.videos)
+  //   })
+  //   //eslint-disable-next-line
+  // }, [])
 
+  const { data } = useAxios('videos')
 
-  React.useEffect(() => {
-    api.get("/videos").then(({ data }) => {
-      setVideos(data.videos)
-    })
-    console.log(videos)
-    //eslint-disable-next-line
-  }, [])
   return (
     <VideosSt>
-      {videos?.map((video) => (
+      {data?.videos?.map((video) => (
         <Video
           key={video._id}
           id={video._id}

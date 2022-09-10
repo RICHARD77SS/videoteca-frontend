@@ -73,7 +73,7 @@ export function VideoContextProvider({ children }) {
     }
     if (id) {
       api.put(`videos/${id}`, video)
-
+//Atualização sem carregamento ao editar o video
       const updatedVideos = {
         videos: data.videos?.map((video) => {
           if (video._id === id) {
@@ -85,6 +85,11 @@ export function VideoContextProvider({ children }) {
       mutate(updatedVideos, false);
     } else {
       api.post('videos', video);
+    //atualização da criação sem recarregar a pagina 
+      const updatedVideos = {
+        videos: [...data.videos, video]
+      }
+      mutate(updatedVideos, false)
     }
     setOpenFormModal(false);
   }

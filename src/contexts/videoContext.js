@@ -73,6 +73,16 @@ export function VideoContextProvider({ children }) {
     }
     if (id) {
       api.put(`videos/${id}`, video)
+
+      const updatedVideos = {
+        videos: data.videos?.map((video) => {
+          if (video._id === id) {
+            return { ...video, title, link };
+          }
+          return video;
+        }),
+      };
+      mutate(updatedVideos, false);
     } else {
       api.post('videos', video);
     }

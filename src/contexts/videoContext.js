@@ -31,12 +31,17 @@ export function VideoContextProvider({ children }) {
   function linkHandler(event) {
     setLink(event.target.value);
   }
-
+  function handleLike(id) {
+    api.patch(`videos/${id}`)
+  }
+  function handleDelete(id) {
+    api.delete(`videos/${id}`)
+  }
   function handleSubmit(event) {
     event.preventDefault()
 
     const video = {
-       title, link
+      title, link
     }
     if (id) {
       api.put(`videos/${id}`, video)
@@ -67,7 +72,9 @@ export function VideoContextProvider({ children }) {
       handleSubmit,
       handleEdit,
       id,
-      setId
+      setId,
+      handleLike,
+      handleDelete
     }}>
     {children}
     {openFormModal && <FormModal />}

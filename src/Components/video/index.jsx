@@ -4,7 +4,7 @@ import { EditSt, Flex, Button } from './styles';
 import { IoPencil, IoThumbsUp, IoTrashBin } from 'react-icons/io5'
 
 const Video = ({ id, title, link, liked }) => {
-  const { handleEdit } = React.useContext(VideoContext);
+  const { handleEdit, handleLike, handleDelete } = React.useContext(VideoContext);
   
 
   return (
@@ -12,14 +12,14 @@ const Video = ({ id, title, link, liked }) => {
       <h2>{title}</h2>
       <a href={link} target='_blank' rel="noreferrer">{link}</a>
       <Flex>
-        <Button liked={liked} type='button'>
+        <Button liked={liked} type='button' onClick={()=>handleLike(id)}>
 
           <IoThumbsUp />
         </Button>
         <Button type='button' onClick={()=>handleEdit(id, title, link)}>
           <IoPencil />
         </Button>
-        <Button type='button'>
+        <Button type='button' onClick={()=>handleDelete(id)}>
           <IoTrashBin />
         </Button>
       </Flex>

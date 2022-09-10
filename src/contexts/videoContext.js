@@ -12,10 +12,11 @@ export function VideoContextProvider({ children }) {
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
   const [id, setId] = useState('');
-
+//Adicionar video
   function handleAdd() {
     setOpenFormModal(true);
   }
+//remove titule o link ao fechar
   function handleClose() {
     setOpenFormModal(false);
     if (title) {
@@ -25,21 +26,25 @@ export function VideoContextProvider({ children }) {
       setLink('')
     }
   }
+//adiciona title ao detectar evento de digitação
   function titleHandler(event) {
     setTitle(event.target.value);
   }
+//adiciona link ao detectar evento de digitação
   function linkHandler(event) {
     setLink(event.target.value);
   }
+//adiciona ou tira o like 
   function handleLike(id) {
     api.patch(`videos/${id}`)
   }
+//deleta o video
   function handleDelete(id) {
     api.delete(`videos/${id}`)
   }
+//envia o video ou edita, caso venha o id na função
   function handleSubmit(event) {
     event.preventDefault()
-
     const video = {
       title, link
     }
@@ -48,10 +53,9 @@ export function VideoContextProvider({ children }) {
     } else {
       api.post('videos', video);
     }
-
     setOpenFormModal(false);
   }
-
+//abre o modal com infos do video clicado
   function handleEdit(videoId, videoTitle, videoLink) {
     setTitle(videoTitle);
     setLink(videoLink);

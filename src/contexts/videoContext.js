@@ -11,6 +11,7 @@ export function VideoContextProvider({ children }) {
   const [openFormModal, setOpenFormModal] = useState();
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
+  const [id, setId] = useState('');
 
   function handleAdd() {
     setOpenFormModal(true);
@@ -33,17 +34,23 @@ export function VideoContextProvider({ children }) {
 
   function handleSubmit(event) {
     event.preventDefault()
+
     const video = {
-      title, link
+       title, link
     }
-    api.post('videos', video);
+    if (id) {
+      api.put(`videos/${id}`, video)
+    } else {
+      api.post('videos', video);
+    }
 
     setOpenFormModal(false);
   }
 
-  function handleEdit(videoTitle, videoLink) {
+  function handleEdit(videoId, videoTitle, videoLink) {
     setTitle(videoTitle);
     setLink(videoLink);
+    setId(videoId);
     setOpenFormModal(true);
   }
 
@@ -58,7 +65,9 @@ export function VideoContextProvider({ children }) {
       link,
       setLink,
       handleSubmit,
-      handleEdit
+      handleEdit,
+      id,
+      setId
     }}>
     {children}
     {openFormModal && <FormModal />}

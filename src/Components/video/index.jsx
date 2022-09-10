@@ -16,7 +16,7 @@ const Video = ({ id, title, link, liked }) => {
 
           <IoThumbsUp />
         </Button>
-        <Button type='button' onClick={()=>handleEdit(title, link)}>
+        <Button type='button' onClick={()=>handleEdit(id, title, link)}>
           <IoPencil />
         </Button>
         <Button type='button'>

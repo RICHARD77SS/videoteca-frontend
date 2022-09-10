@@ -1,15 +1,18 @@
 
 import GlobalStyles from "./styles/GlobalStyles";
 
-import Videos from "./Components/AddVideo";
+import Videos from "./Components/videoList";
+
+import { VideoContextProvider } from "./contexts/videoContext";
 
 function App() {
   return (
-    <div>
-      <h1>Hello world</h1>
-      <Videos />
+    <>
+      <VideoContextProvider>
+        <Videos />
+      </VideoContextProvider>
       <GlobalStyles />
-    </div>
+    </>
   );
 }
 

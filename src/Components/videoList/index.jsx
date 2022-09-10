@@ -1,12 +1,15 @@
-import React from 'react';
-import Video from '../EditVideo';
+import React, { useContext } from 'react';
+
+import { VideoContext } from '../../contexts/videoContext';
+import Video from '../video';
 
 import { VideosSt, AddVideoSt } from './styles'
 
 import api from '../../services/api';
 
-const Videos = () => {
 
+const Videos = () => {
+  const { handleAdd } = useContext(VideoContext)
   const [videos, setVideos] = React.useState([]);
 
 
@@ -14,7 +17,7 @@ const Videos = () => {
     api.get("/videos").then(({ data }) => {
       setVideos(data.videos)
     })
-    console.log(videos)  
+    console.log(videos)
     //eslint-disable-next-line
   }, [])
   return (
@@ -28,7 +31,7 @@ const Videos = () => {
           liked={video.liked}
         />
       ))}
-      <AddVideoSt>
+      <AddVideoSt onClick={handleAdd}>
         +
       </AddVideoSt>
     </VideosSt>
